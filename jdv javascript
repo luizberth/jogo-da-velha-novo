@@ -1,0 +1,58 @@
+var jogador = 'x';
+var jogada = 0;
+function checkjogo(id){
+	var src = checksrc(id);
+	if(src == "branco.png"){
+		document.getElementById(id).src = "img/" + jogador + ".png";
+		jogada++;
+		if(checkVitoria()){
+			alert('FIM DO JOGO!! Vitoria do ' + jogador);
+			location.reload();
+			jogada = 0;
+		}
+		if(jogada >= 9){
+			alert('JOGO DEU EMPATE');
+			location.reload();
+		}
+		if(jogador == 'x'){
+			jogador = 'O';
+
+		}else{
+			jogador = 'x';
+		}
+	}
+}
+function checksrc(id){
+	var src = document.getElementById(id).src;
+	return src.substring(src.length - 10, src.length);
+}
+
+function checkVitoria(){
+	if((checksrc('cel1') == checksrc('cel2')) && (checksrc('cel1') == checksrc('cel3')) && checksrc('cel1') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel4') == checksrc('cel5')) && (checksrc('cel4') == checksrc('cel6')) && checksrc('cel4') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel7') == checksrc('cel8')) && (checksrc('cel7') == checksrc('cel9')) && checksrc('cel7') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel1') == checksrc('cel4')) && (checksrc('cel1') == checksrc('cel7')) && checksrc('cel1') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel2') == checksrc('cel5')) && (checksrc('cel2') == checksrc('cel8')) && checksrc('cel2') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel3') == checksrc('cel6')) && (checksrc('cel3') == checksrc('cel9')) && checksrc('cel3') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel1') == checksrc('cel5')) && (checksrc('cel1') == checksrc('cel9')) && checksrc('cel1') != 'branco.png'){
+		return true;
+	}
+	if((checksrc('cel3') == checksrc('cel5')) && (checksrc('cel3') == checksrc('cel7')) && checksrc('cel3') != 'branco.png'){
+		return true;
+	}
+
+	return false;
+
+}
